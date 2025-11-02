@@ -1,5 +1,5 @@
 import { createHash, createHmac } from "node:crypto";
-import type { TelegramAuthData, TelegramMiniAppData } from "./types";
+import type { TelegramAuthData } from "./types";
 
 /**
  * Verifies the authenticity of Telegram authentication data
@@ -43,47 +43,6 @@ export function verifyTelegramAuth(
 
   // Compare with received hash
   return hmac === hash;
-}
-
-/**
- * Validates that required fields are present in Telegram auth data
- */
-export function validateTelegramAuthData(data: any): data is TelegramAuthData {
-  return (
-    typeof data === "object" &&
-    data !== null &&
-    typeof data.id === "number" &&
-    typeof data.first_name === "string" &&
-    typeof data.auth_date === "number" &&
-    typeof data.hash === "string"
-  );
-}
-
-/**
- * Parse initData string from Telegram Mini App
- * @param initData - URL-encoded initData string from Telegram.WebApp.initData
- * @returns Parsed Mini App data object
- */
-export function parseMiniAppInitData(initData: string): TelegramMiniAppData {
-  const params = new URLSearchParams(initData);
-  const data: any = {};
-
-  for (const [key, value] of params.entries()) {
-    if (key === "user" || key === "receiver" || key === "chat") {
-      // Parse JSON objects
-      try {
-        data[key] = JSON.parse(value);
-      } catch {}
-    } else if (key === "auth_date" || key === "can_send_after") {
-      // Parse numbers
-      data[key] = Number(value);
-    } else {
-      // Keep as string
-      data[key] = value;
-    }
-  }
-
-  return data as TelegramMiniAppData;
 }
 
 /**
@@ -139,20 +98,4 @@ export function verifyMiniAppInitData(
 
   // Compare with received hash
   return calculatedHash === hash;
-}
-
-/**
- * Validates that required fields are present in Mini App data
- */
-export function validateMiniAppData(data: any): data is TelegramMiniAppData {
-  return (
-    typeof data === "object" &&
-    data !== null &&
-    typeof data.auth_date === "number" &&
-    typeof data.hash === "string" &&
-    (data.user === undefined ||
-      (typeof data.user === "object" &&
-        typeof data.user.id === "number" &&
-        typeof data.user.first_name === "string"))
-  );
 }
