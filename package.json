@@ -20,8 +20,8 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsup",
-    "dev": "tsup --watch",
+    "build": "tsdown",
+    "dev": "tsdown --watch",
     "type-check": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
@@ -52,6 +52,7 @@
   "engines": {
     "node": ">=22.0.0"
   },
+  "type": "module",
   "devDependencies": {
     "@biomejs/biome": "2.2.4",
     "@types/node": "^22.0.0",
@@ -61,7 +62,7 @@
     "happy-dom": "^19.0.2",
     "lint-staged": "16.2.3",
     "node-loader": "^2.1.0",
-    "tsup": "^8.5.0",
+    "tsdown": "^0.15.12",
     "typescript": "^5.9.3",
     "ultracite": "^5.4.5",
     "vitest": "^3.2.4"

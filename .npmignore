@@ -5,7 +5,7 @@ src/
 
 # Build configs
 tsconfig.json
-tsup.config.ts
+tsdown.config.ts
 vitest.config.ts
 biome.jsonc
 
