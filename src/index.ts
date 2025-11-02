@@ -1,13 +1,10 @@
 import type { BetterAuthPlugin, User } from "better-auth";
 import { createAuthEndpoint, sessionMiddleware } from "better-auth/api";
 import { setSessionCookie } from "better-auth/cookies";
+import { parseMiniAppInitData } from "./parse";
 import type { TelegramAuthData, TelegramPluginOptions } from "./types";
 import { validateMiniAppData, validateTelegramAuthData } from "./validate";
-import {
-  parseMiniAppInitData,
-  verifyMiniAppInitData,
-  verifyTelegramAuth,
-} from "./verify";
+import { verifyMiniAppInitData, verifyTelegramAuth } from "./verify";
 
 export type {
   TelegramAuthData,
