@@ -46,20 +46,6 @@ export function verifyTelegramAuth(
 }
 
 /**
- * Validates that required fields are present in Telegram auth data
- */
-export function validateTelegramAuthData(data: any): data is TelegramAuthData {
-  return (
-    typeof data === "object" &&
-    data !== null &&
-    typeof data.id === "number" &&
-    typeof data.first_name === "string" &&
-    typeof data.auth_date === "number" &&
-    typeof data.hash === "string"
-  );
-}
-
-/**
  * Parse initData string from Telegram Mini App
  * @param initData - URL-encoded initData string from Telegram.WebApp.initData
  * @returns Parsed Mini App data object
@@ -139,20 +125,4 @@ export function verifyMiniAppInitData(
 
   // Compare with received hash
   return calculatedHash === hash;
-}
-
-/**
- * Validates that required fields are present in Mini App data
- */
-export function validateMiniAppData(data: any): data is TelegramMiniAppData {
-  return (
-    typeof data === "object" &&
-    data !== null &&
-    typeof data.auth_date === "number" &&
-    typeof data.hash === "string" &&
-    (data.user === undefined ||
-      (typeof data.user === "object" &&
-        typeof data.user.id === "number" &&
-        typeof data.user.first_name === "string"))
-  );
 }
